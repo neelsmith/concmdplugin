@@ -1,2 +1,3 @@
 # concmdplugin
-Gradle plugin for using markdown files with concordion
+
+A gradle plugin for using markdown files with concordion.
