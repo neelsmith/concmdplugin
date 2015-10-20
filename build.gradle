@@ -7,7 +7,26 @@ buildscript {
 
 apply plugin: 'groovy'
 apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin:  "maven"
 
+if (hasProperty('pub')) {
+  System.err.print "Using configuration data from ${pub}"
+  File confFile = new File(pub)
+  if (! confFile.exists()) {
+      throw new Exception("No publication configuration file ${pub} found.")
+  } else {
+      apply from: pub
+  }
+
+} else {
+    File confFile = new File("pub.gradle")
+    if (! confFile.exists()) {
+      throw new Exception("No publication configuration file ${confFile} found.")
+    } else {
+      println "Using default configuration in 'pub.gradle'"
+      apply from: "pub.gradle"
+    }
+}
 
 
 dependencies {
@@ -23,18 +42,44 @@ repositories {
 
 dependencies {
   compile group: 'com.github.rjeschke', name: 'txtmark', version: '0.11'
+
   runtime group: 'com.github.rjeschke', name: 'txtmark', version: '0.11'
 
   testCompile 'junit:junit:4.12'
+}
+
+
+artifacts {
+  archives shadowJar
 }
 
 jar {
   baseName "concmd"
 }
 
+
 shadowJar {
+  classifier "all"
   baseName "concmd"
 }
 
 group = 'edu.holycross.shot'
-version = '0.0.1'
+version = '1.0.0'
+
+
+uploadArchives {
+  repositories.mavenDeployer {
+    repository(url: nexusRepo) {
+      authentication (userName: nexusUser, password: nexusPassword)
+    }
+  }
+}
+
+
+uploadShadow{
+  repositories.mavenDeployer {
+    repository(url: nexusRepo) {
+      authentication (userName: nexusUser, password: nexusPassword)
+    }
+  }
+}

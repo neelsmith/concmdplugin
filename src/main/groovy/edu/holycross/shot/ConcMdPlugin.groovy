@@ -5,6 +5,6 @@ import org.gradle.api.Plugin
 
 class ConcMdPlugin implements Plugin<Project> {
     void apply(Project target) {
-        target.task('cpConcMd', type: ConcMdTask)
+        target.task('convertConcMd', type: ConcMdTask)
     }
 }
