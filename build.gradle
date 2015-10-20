@@ -14,5 +14,10 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 
+
+jar {
+  baseName "concmd"
+}
+
 group = 'edu.holycross.shot'
 version = '0.0.1'

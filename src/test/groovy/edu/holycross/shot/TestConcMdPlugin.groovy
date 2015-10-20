@@ -11,6 +11,6 @@ class TestConcMdPlugin {
         Project project = ProjectBuilder.builder().build()
         project.pluginManager.apply 'edu.holycross.shot.concmd'
 
-        assertTrue(project.tasks.hello instanceof ConcMdTask)
+        assertTrue(project.tasks.cpConcMd instanceof ConcMdTask)
     }
 }
