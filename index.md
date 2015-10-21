@@ -3,11 +3,11 @@ layout: page
 title: The concmd gradle plugin
 ---
 
-[Concordion](http://concordion.org/) is wonderful, but who needs all the HTML pointy brackets?  It's 2015:  write your prose in markdown already.
+Write testable [concordion](http://concordion.org/) specifications in markdown.
 
-## Use the plugin in 3 easy steps
 
-In your gradle build file:
+## Configure your gradle build file
+
 
 **1**. Apply the plugin:
 
@@ -38,4 +38,9 @@ In your gradle build file:
 ## Writing testable prose
 
 Testable prose is not just for program specifications!  See a [gradle project using this
-plugin](http://neelsmith.github.io/concmd/) to help you write machine-testable prose in markdown.    
+plugin](http://neelsmith.github.io/concmd/) to help you write machine-testable prose in markdown.
+
+
+## Release notes
+
+See [details](releases).

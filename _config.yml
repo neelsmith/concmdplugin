@@ -18,6 +18,8 @@ paginate:         5
 
 
 links:
+  - title: Release notes
+    url: releases
   - title: Neel Smith on github
     url: http://neelsmith.github.io/
     external: true
