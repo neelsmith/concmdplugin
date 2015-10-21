@@ -66,8 +66,6 @@ shadowJar {
   baseName "concmd"
 }
 
-
-
 uploadArchives {
   repositories.mavenDeployer {
     repository(url: nexusRepo) {
@@ -76,11 +74,3 @@ uploadArchives {
   }
 }
 
-
-uploadShadow{
-  repositories.mavenDeployer {
-    repository(url: nexusRepo) {
-      authentication (userName: nexusUser, password: nexusPassword)
-    }
-  }
-}
