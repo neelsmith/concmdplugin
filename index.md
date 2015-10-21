@@ -33,3 +33,9 @@ In your gradle build file:
       from = "specs"
       into = "output"
     }
+
+
+## Writing testable prose
+
+Testable prose is not just for program specifications!  See a [gradle project using this
+plugin](http://neelsmith.github.io/concmd/) to help you write machine-testable prose in markdown.    
