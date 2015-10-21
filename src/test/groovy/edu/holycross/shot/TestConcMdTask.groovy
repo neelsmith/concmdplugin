@@ -5,11 +5,11 @@ import org.gradle.testfixtures.ProjectBuilder
 import org.gradle.api.Project
 import static org.junit.Assert.*
 
-class TestConcMdPlugin {
+class TestConcMdTask {
     @Test
     public void addTaskToProject() {
         Project project = ProjectBuilder.builder().build()
-        project.pluginManager.apply 'edu.holycross.shot.concmd'
-        assertTrue(project.tasks.convertConcMd instanceof ConcMdTask)
+        def task = project.task('testTask', type: ConcMdTask)
+        assertTrue(task instanceof ConcMdTask)
     }
 }
