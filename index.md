@@ -1,3 +1,4 @@
-#gh-pages branch of concmdplugin#
-
- Read it here.
+---
+layout: page
+title: The concmd gradle plugin
+---

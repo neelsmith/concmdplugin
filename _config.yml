@@ -1,0 +1,24 @@
+# Dependencies
+markdown:         redcarpet
+pygments:         true
+
+# Permalinks
+permalink:        pretty
+
+# Setup
+title:            The concmd gradle plugin
+tagline:          'Write concordion tests in markdown'
+baseurl: "/concmd/"
+
+
+author:
+  name:           'Neel Smith'
+ 
+paginate:         5
+
+
+links:
+  - title: Neel Smith on github
+    url: http://neelsmith.github.io/
+    external: true
+   
