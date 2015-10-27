@@ -7,6 +7,7 @@ import org.gradle.api.file.FileTree
 import com.github.rjeschke.txtmark.*
 
 class ConcMdTask extends DefaultTask {
+  Integer debug = 0
   String from = "specs"
   String into = "build/specs"
 
@@ -25,42 +26,51 @@ class ConcMdTask extends DefaultTask {
    * @param treePath Relative path within file tree.
    * @returns New File object.
    */
-  File outForIn(def treePath) {
-    File inFile = new File("${from}/${treePath}")
-    File outFile = new File("${into}/${treePath}")
-
-    if ( (inFile.isDirectory()) && (! outFile.exists())) {
-      outFile.mkdir()
+  File outForIn(org.gradle.api.file.RelativePath treePath) {
+    File inFile = new File("${getFrom()}/${treePath}")
+    File outFile = new File("${getInto()}/${treePath}")
+    if (inFile.isDirectory()) {
+      if   (! outFile.exists()) {
+	outFile.mkdir()
+      }
+      
     } else {
       String htmlFileName = treePath.toString().replaceFirst(/.md$/,".html")
-      outFile = new File(into, htmlFileName)
+      outFile = new File(getInto(), htmlFileName)
       outFile.setText("<html><head><title>Empty HTML file</title></head><body/></html>")
     }
-    
+
     return outFile
   }
-  
+
   @TaskAction
   def concmdAction() {
-    def fromDir =  getFrom()
-    def intoDir = getInto()
-    println "ConcMdTask: Use source in " + fromDir
+    File fromDir =  getFrom()
+    File intoDir = getInto()
+    println "ConcMdTask: Use source in " + fromDir 
     println "ConcMdTask: Write output to " + intoDir
-
-
+    
+    
     String currentSubDir = intoDir.toString()
-    File outDir = new File(currentSubDir)
+    File outDir
+    try {
+      outDir = new File(currentSubDir)
+    } catch (Exception e) {
+      System.err.println "ConcMdTask: unable able to create subdirectory " + currentSubDir
+      throw e
+    }
+
     // Won't create whole containing hierarchy, but if
     // the named directory doesn't yet exist, make it.
     if (! outDir.exists()) {
       outDir.mkdir()
     }
-
+    
     FileTree tree = project.fileTree(fromDir) {
       include "**/*.md"
     }
     tree.visit { f ->
-      File inFile = new File("${fromDir}/${f.relativePath}")
+      File inFile = project.file("${fromDir}/${f.relativePath}")
       File outFile = outForIn(f.relativePath)
       if (outFile.isDirectory()) {
 	// skip
@@ -71,8 +81,8 @@ class ConcMdTask extends DefaultTask {
 	} catch (Exception e) {
 	  System.err.println "ConcMdTask: unable to convert markdown source ${inFile} to HTML ${outFile}."
 	  System.err.println e
-	  }
+	}
       }
     }
-  }  
+  }
 }
