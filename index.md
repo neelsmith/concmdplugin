@@ -6,6 +6,11 @@ title: The concmd gradle plugin
 Write testable [concordion](http://concordion.org/) specifications in markdown.
 
 
+## Prerequisites
+
+- Java version >= 7
+
+
 ## Configure your gradle build file
 
 
@@ -22,7 +27,7 @@ Write testable [concordion](http://concordion.org/) specifications in markdown.
       	}
       }
       dependencies {
-        classpath group: "edu.holycross.shot", name: "concmd", version: "1.0.0", classifier: "all"
+        classpath group: "edu.holycross.shot", name: "concmd", version: "1.0.3", classifier: "all"
       }
     }
 
